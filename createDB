@@ -1,0 +1,44 @@
+DROP TABLE IF EXISTS Locations;
+CREATE TABLE Locations(
+	LocationID int IDENTITY(1,1) PRIMARY KEY,
+	LocationName varchar(50)
+);
+
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users(
+	UserID int IDENTITY(1,1) PRIMARY KEY,
+	UserName varchar(50) NOT NULL,
+	UserInfo varchar(100),
+	UserRole int FOREIGN KEY REFERENCES Roles(RoleID)
+);
+
+DROP TABLE IF EXISTS Roles;
+CREATE TABLE Roles(
+	RoleID int IDENTITY(1,1) PRIMARY KEY,
+	RoleName varchar(50) NOT NULL,
+	RoleDescription varchar(100)
+);
+
+DROP TABLE IF EXISTS Taverns;
+CREATE TABLE Taverns (
+	TavernID int IDENTITY(1, 1) PRIMARY KEY,
+	TavernName varchar(50) NOT NULL ,
+	NumFloors tinyint NOT NULL,
+	TavernLocation int FOREIGN KEY REFERENCES Locations(LocationID),
+    TavernOwner int FOREIGN KEY REFERENCES Users(UserID)
+);
+
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users (
+	UserID int IDENTITY(1,1) PRIMARY KEY,
+	UserName varchar(50) NOT NULL,
+	UserDescription varchar(100),
+	UserRole int NOT NULL
+);
+
+DROP TABLE IF EXISTS Rats;
+CREATE TABLE Rats(
+	RatID int IDENTITY(1,1) PRIMARY KEY,
+	RatName varchar(30) NOT NULL,
+	RatTavern int FOREIGN KEY REFERENCES Taverns(TavernID)
+);
