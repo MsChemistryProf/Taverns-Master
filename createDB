@@ -4,14 +4,6 @@ CREATE TABLE Locations(
 	LocationName varchar(50)
 );
 
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users(
-	UserID int IDENTITY(1,1) PRIMARY KEY,
-	UserName varchar(50) NOT NULL,
-	UserInfo varchar(100),
-	UserRole int FOREIGN KEY REFERENCES Roles(RoleID)
-);
-
 DROP TABLE IF EXISTS Roles;
 CREATE TABLE Roles(
 	RoleID int IDENTITY(1,1) PRIMARY KEY,
@@ -19,21 +11,21 @@ CREATE TABLE Roles(
 	RoleDescription varchar(100)
 );
 
+DROP TABLE IF EXISTS Users;
+CREATE TABLE Users(
+	UserID int IDENTITY(1,1) PRIMARY KEY,
+	UserName varchar(50) NOT NULL,
+	UserInfo varchar(100),
+	UserRole int FOREIGN KEY REFERENCES Roles(RoleID)
+)
+
 DROP TABLE IF EXISTS Taverns;
 CREATE TABLE Taverns (
 	TavernID int IDENTITY(1, 1) PRIMARY KEY,
-	TavernName varchar(50) NOT NULL ,
+	TavernName varchar(50) NOT NULL,
 	NumFloors tinyint NOT NULL,
 	TavernLocation int FOREIGN KEY REFERENCES Locations(LocationID),
     TavernOwner int FOREIGN KEY REFERENCES Users(UserID)
-);
-
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users (
-	UserID int IDENTITY(1,1) PRIMARY KEY,
-	UserName varchar(50) NOT NULL,
-	UserDescription varchar(100),
-	UserRole int NOT NULL
 );
 
 DROP TABLE IF EXISTS Rats;
@@ -62,37 +54,37 @@ CREATE TABLE Status(
 	StatusName varchar(30) NOT NULL
 );
 
-DROP TABLE IF EXISTS Services;
-CREATE TABLE Services(
+DROP TABLE IF EXISTS Service;
+CREATE TABLE Service(
 	ServiceID int IDENTITY(1,1) PRIMARY KEY,
 	ServiceStatusID int FOREIGN KEY REFERENCES Status(StatusID)
 );
 
 DROP TABLE IF EXISTS Inventory;
 CREATE TABLE Inventory(
-	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID);
-	SupplyID int FOREIGN KEY REFERENCES Supplies(SupplyID);
-	DateLastUpdated smalldatetime NOT NULL;
+	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID),
+	SupplyID int FOREIGN KEY REFERENCES Supplies(SupplyID),
+	DateLastUpdated smalldatetime NOT NULL,
 	CurrentCount smallint NOT NULL
 );
 
 DROP TABLE IF EXISTS Receivables;
 CREATE TABLE Receivables(
-	ReceivableID int IDENTITY(1,1) PRIMARY KEY;
-	SupplyID int FOREIGN KEY REFERENCES Supplies(SupplyID);
-	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID);
-	cost smallmoney NOT NULL;
-	UnitsReceived decimal(5,1) NOT NULL;
+	ReceivableID int IDENTITY(1,1) PRIMARY KEY,
+	SupplyID int FOREIGN KEY REFERENCES Supplies(SupplyID),
+	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID),
+	cost smallmoney NOT NULL,
+	UnitsReceived decimal(5,1) NOT NULL,
 	DateReceived smalldatetime NOT NULL
 );
 
 DROP TABLE IF EXISTS Sales;
 CREATE TABLE Sales(
-	SaleID int IDENTITY(1,1) PRIMARY KEY;
-	ServiceID int FOREIGN KEY REFERENCES Services(ServiceID);
-	GuestID int FOREIGN KEY REFERENCES Guests(GuestID);
-	TotalPrice smallmoney NOT NULL;
-	DateOfSale smalldatetime NOT NULL;
-	AmountPurchased decimal(5,1) NOT NULL;
+	SaleID int IDENTITY(1,1) PRIMARY KEY,
+	ServiceID int FOREIGN KEY REFERENCES Service(ServiceID),
+	GuestID int FOREIGN KEY REFERENCES Guests(GuestID),
+	TotalPrice smallmoney NOT NULL,
+	DateOfSale smalldatetime NOT NULL,
+	AmountPurchased decimal(5,1) NOT NULL,
 	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID)
 );
