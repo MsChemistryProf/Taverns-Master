@@ -42,3 +42,57 @@ CREATE TABLE Rats(
 	RatName varchar(30) NOT NULL,
 	RatTavern int FOREIGN KEY REFERENCES Taverns(TavernID)
 );
+
+DROP TABLE IF EXISTS Guests;
+CREATE TABLE Guests(
+	GuestID int IDENTITY(1,1) PRIMARY KEY,
+	GuestName varchar(50) NOT NULL
+);
+
+DROP TABLE IF EXISTS Supplies;
+CREATE TABLE Supplies(
+	SupplyID int IDENTITY(1,1) PRIMARY KEY,
+	SupplyName varchar(30) NOT NULL,
+	SupplyUnit varchar(10) NOT NULL
+);
+
+DROP TABLE IF EXISTS Status;
+CREATE TABLE Status(
+	StatusID int IDENTITY(1,1) PRIMARY KEY,
+	StatusName varchar(30) NOT NULL
+);
+
+DROP TABLE IF EXISTS Services;
+CREATE TABLE Services(
+	ServiceID int IDENTITY(1,1) PRIMARY KEY,
+	ServiceStatusID int FOREIGN KEY REFERENCES Status(StatusID)
+);
+
+DROP TABLE IF EXISTS Inventory;
+CREATE TABLE Inventory(
+	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID);
+	SupplyID int FOREIGN KEY REFERENCES Supplies(SupplyID);
+	DateLastUpdated smalldatetime NOT NULL;
+	CurrentCount smallint NOT NULL
+);
+
+DROP TABLE IF EXISTS Receivables;
+CREATE TABLE Receivables(
+	ReceivableID int IDENTITY(1,1) PRIMARY KEY;
+	SupplyID int FOREIGN KEY REFERENCES Supplies(SupplyID);
+	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID);
+	cost smallmoney NOT NULL;
+	UnitsReceived decimal(5,1) NOT NULL;
+	DateReceived smalldatetime NOT NULL
+);
+
+DROP TABLE IF EXISTS Sales;
+CREATE TABLE Sales(
+	SaleID int IDENTITY(1,1) PRIMARY KEY;
+	ServiceID int FOREIGN KEY REFERENCES Services(ServiceID);
+	GuestID int FOREIGN KEY REFERENCES Guests(GuestID);
+	TotalPrice smallmoney NOT NULL;
+	DateOfSale smalldatetime NOT NULL;
+	AmountPurchased decimal(5,1) NOT NULL;
+	TavernID int FOREIGN KEY REFERENCES Taverns(TavernID)
+);
