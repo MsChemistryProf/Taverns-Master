@@ -1,18 +1,31 @@
 INSERT INTO Locations VALUES ('Islington');
 INSERT INTO Locations VALUES ('Dublin');
+INSERT INTO Locations VALUES ('Scotland');
+INSERT INTO Locations VALUES ('Mt.Holly');
+INSERT INTO Locations VALUES ('Shamong');
+INSERT INTO Locations VALUES ('Waterford');
+
 
 INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Owner', 'Sole Owner of this tavern');
 INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Proprietor', 'Master of the House');
+INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Barman', 'All around Awesome Person');
 
 INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Hagrid', 'groundskeeper', 2);
-INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Tony', 'some douche canoe', 1);
+INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Bill', 'some douche canoe', 1);
+INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Brian', 'bartender', 3);
+INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Carol', 'barmaid', 3);
 
 INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Horse and Groom', 2, 1, 1);
-INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Dunleavys', 3, 2, 1);
+INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Dunleavys', 3, 4, 3);
+INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Dadz', 1, 4, 2);
+INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Pic a Lilli', 2, 5, 1);
+INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Just One More', 1, 5, 1);
+
 
 INSERT INTO Rats (RatName, RatTavern) VALUES ('Benjy', 1);
 INSERT INTO Rats (RatName, RatTavern) VALUES ('Frankie', 1);
-INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Bryan', 2);
+INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Kelley', 2);
+INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Tony', 2);
 
 INSERT INTO Guests (GuestName) VALUES ('Ford Prefect');
 INSERT INTO Guests (GuestName) VALUES ('Arthur Dent');
@@ -24,10 +37,10 @@ INSERT INTO Supplies (SupplyName, SupplyUnit) VALUES ('CaptainMorgan', 'oz');
 
 INSERT INTO Status (StatusName) VALUES ('out of stock');
 INSERT INTO Status (StatusName) VALUES ('backordered');
-INSERT INTO Status (StatusName) VALUES ('in stock');
-INSERT INTO Status (StatusName) VALUES ('unlimited');
+INSERT INTO Status (StatusName) VALUES ('active');
+INSERT INTO Status (StatusName) VALUES ('inactive');
 
-INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('knife sharpening', 4);
+INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('knife sharpening', 3);
 INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('ice blocks', 1);
 INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('beer to go', 3);
 
