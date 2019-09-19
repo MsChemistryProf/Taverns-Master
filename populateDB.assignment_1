@@ -1,0 +1,41 @@
+INSERT INTO Locations VALUES ('Islington');
+INSERT INTO Locations VALUES ('Dublin');
+
+INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Owner', 'Sole Owner of this tavern');
+INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Proprietor', 'Master of the House');
+
+INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Hagrid', 'groundskeeper', 2);
+INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Tony', 'some douche canoe', 1);
+
+INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Horse and Groom', 2, 1, 1);
+INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Dunleavys', 3, 2, 1);
+
+INSERT INTO Rats (RatName, RatTavern) VALUES ('Benjy', 1);
+INSERT INTO Rats (RatName, RatTavern) VALUES ('Frankie', 1);
+INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Bryan', 2);
+
+INSERT INTO Guests (GuestName) VALUES ('Ford Prefect');
+INSERT INTO Guests (GuestName) VALUES ('Arthur Dent');
+INSERT INTO Guests (GuestName) VALUES ('Harry Potter');
+
+INSERT INTO Supplies (SupplyName, SupplyUnit) VALUES ('Guiness', 'pints');
+INSERT INTO Supplies (SupplyName, SupplyUnit) VALUES ('Jack', 'mL');
+INSERT INTO Supplies (SupplyName, SupplyUnit) VALUES ('CaptainMorgan', 'oz');
+
+INSERT INTO Status (StatusName) VALUES ('out of stock');
+INSERT INTO Status (StatusName) VALUES ('backordered');
+INSERT INTO Status (StatusName) VALUES ('in stock');
+INSERT INTO Status (StatusName) VALUES ('unlimited');
+
+INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('knife sharpening', 4);
+INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('ice blocks', 1);
+INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('beer to go', 3);
+
+INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (1, 1, '2019-09-16', 500);
+INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (2, 2, '2019-09-16', 20);
+
+INSERT INTO Receivables (SupplyID, TavernID, cost, UnitsReceived, DateReceived) VALUES (1,1,200,100,'2019-09-16');
+INSERT INTO Receivables (SupplyID, TavernID, cost, UnitsReceived, DateReceived) VALUES (2,2,100,100,'2019-09-16');
+
+INSERT INTO Sales (ServiceID, GuestID, TotalPrice, DateOfSale, AmountPurchased, TavernID) VALUES (2,1,12.50, '2019-09-16', 4, 1);
+INSERT INTO Sales (ServiceID, GuestID, TotalPrice, DateOfSale, AmountPurchased, TavernID) VALUES (3,2,10, '2019-09-16', 4, 1);
