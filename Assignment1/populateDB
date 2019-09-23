@@ -4,32 +4,45 @@ INSERT INTO Locations VALUES ('Scotland');
 INSERT INTO Locations VALUES ('Mt.Holly');
 INSERT INTO Locations VALUES ('Shamong');
 INSERT INTO Locations VALUES ('Waterford');
+INSERT INTO Locations VALUES ('Germany');
 
 
 INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Owner', 'Sole Owner of this tavern');
 INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Proprietor', 'Master of the House');
 INSERT INTO Roles (RoleName, RoleDescription) VALUES ('Barman', 'All around Awesome Person');
 
+
 INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Hagrid', 'groundskeeper', 2);
 INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Bill', 'some douche canoe', 1);
 INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Brian', 'bartender', 3);
 INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Carol', 'barmaid', 3);
+INSERT INTO Users (UserName, UserInfo, UserRole) VALUES ('Voltenheimer', 'strong guy', 2);
 
 INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Horse and Groom', 2, 1, 1);
 INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Dunleavys', 3, 4, 3);
 INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Dadz', 1, 4, 2);
 INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Pic a Lilli', 2, 5, 1);
 INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Just One More', 1, 5, 1);
+INSERT INTO Taverns (TavernName, NumFloors, TavernLocation, TavernOwner) VALUES ('Ye Olde Tavern', 2, 7, 5);
 
 
 INSERT INTO Rats (RatName, RatTavern) VALUES ('Benjy', 1);
 INSERT INTO Rats (RatName, RatTavern) VALUES ('Frankie', 1);
 INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Kelley', 2);
 INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Tony', 2);
+INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Jerry', 6);
+INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Kramer', 6);
+INSERT INTO Rats (RatNAME, RatTavern) VALUES ('Stuart', 4);
+
 
 INSERT INTO Guests (GuestName) VALUES ('Ford Prefect');
 INSERT INTO Guests (GuestName) VALUES ('Arthur Dent');
 INSERT INTO Guests (GuestName) VALUES ('Harry Potter');
+INSERT INTO Guests (GuestName) VALUES ('Hermione Granger');
+INSERT INTO Guests (GuestName) VALUES ('Spencer Hamilton');
+INSERT INTO Guests (GuestName) VALUES ('Lisa Warren');
+INSERT INTO Guests (GuestName) VALUES ('Zaphod Beeblebrox');
+INSERT INTO Guests (GuestName) VALUES ('Tricia McMillan');
 
 INSERT INTO Supplies (SupplyName, SupplyUnit) VALUES ('Guiness', 'pints');
 INSERT INTO Supplies (SupplyName, SupplyUnit) VALUES ('Jack', 'mL');
@@ -43,12 +56,24 @@ INSERT INTO Status (StatusName) VALUES ('inactive');
 INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('knife sharpening', 3);
 INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('ice blocks', 1);
 INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('beer to go', 3);
+INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('weapon tinkering', 3);
+INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('firewood', 3);
+INSERT INTO Service (ServiceName, ServiceStatusID) VALUES ('quests', 3);
 
 INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (1, 1, '2019-09-16', 500);
 INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (2, 2, '2019-09-16', 20);
+INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (4, 3, '2019-09-01', 50);
+INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (5, 2, '2019-08-25', 150);
+INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (3, 1, '2019-08-15', 42);
+INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (6, 3, '2019-09-02', 24);
+INSERT INTO Inventory (TavernID, SupplyID, DateLastUpdated, CurrentCount) VALUES (1, 2, '2019-09-16', 1020);
+
 
 INSERT INTO Receivables (SupplyID, TavernID, cost, UnitsReceived, DateReceived) VALUES (1,1,200,100,'2019-09-16');
 INSERT INTO Receivables (SupplyID, TavernID, cost, UnitsReceived, DateReceived) VALUES (2,2,100,100,'2019-09-16');
+INSERT INTO Receivables (SupplyID, TavernID, cost, UnitsReceived, DateReceived) VALUES (3,6,50,50, '2019-09-01');
 
 INSERT INTO Sales (ServiceID, GuestID, TotalPrice, DateOfSale, AmountPurchased, TavernID) VALUES (2,1,12.50, '2019-09-16', 4, 1);
 INSERT INTO Sales (ServiceID, GuestID, TotalPrice, DateOfSale, AmountPurchased, TavernID) VALUES (3,2,10, '2019-09-16', 4, 1);
+INSERT INTO Sales (ServiceID, GuestID, TotalPrice, DateOfSale, AmountPurchased, TavernID) VALUES (6,5,200, '2019-09-05', 1,6);
+INSERT INTO Sales (ServiceID, GuestID, TotalPrice, DateOfSale, AmountPurchased, TavernID) VALUES (4,4,75, '2019-09-01', 1,2);
