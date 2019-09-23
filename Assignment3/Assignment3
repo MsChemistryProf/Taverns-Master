@@ -1,0 +1,53 @@
+
+-- ASSIGNMENT 3
+
+-- ITEM #1
+
+
+
+DROP TABLE IF EXISTS Stays;
+DROP TABLE IF EXISTS Rooms;
+DROP TABLE IF EXISTS Roomstatus;
+
+CREATE TABLE RoomStatus (
+	RoomStatusID int IDENTITY(1,1) PRIMARY KEY,
+	RoomStatusName varchar(20)
+	);
+
+INSERT INTO RoomStatus VALUES
+	('Available'),
+	('Unavailable'),
+	('Occupied');
+
+CREATE TABLE Rooms (
+	RoomID int IDENTITY(1,1) PRIMARY KEY,
+	RoomName varchar(20),
+	RoomStatusID int FOREIGN KEY REFERENCES RoomStatus(RoomStatusID),
+	RoomTavernID int FOREIGN KEY REFERENCES Taverns(TavernID)
+	);
+
+INSERT INTO Rooms VALUES
+	('The Penthouse',1,1),
+	('Pics Pick',1,4),
+	('Room 305',1,2),
+	('Room 202',3,2),
+	('Room 201',2,6),
+	('Room 202',1,6),
+	('Room 142',2,5);
+
+INSERT INTO Service VALUES
+	('Room Stay', 3);
+
+CREATE TABLE Stays (
+	StayID int IDENTITY(1,1) PRIMARY KEY,
+	GuestID int FOREIGN KEY REFERENCES Guests(GuestID),
+	RoomID int FOREIGN KEY REFERENCES Rooms(RoomID),
+	DateOfStay date,
+	RateOfStay smallmoney
+	);
+
+INSERT INTO Stays VALUES
+	(6,2,'09-18-2019',500.00),
+	(1,7,'09-02-2019',200.00),
+	(5,4,'09-22-2019',150.00),
+	(7,7,'08-15-2019',999.00);
