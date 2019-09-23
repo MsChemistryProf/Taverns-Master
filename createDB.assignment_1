@@ -27,7 +27,7 @@ CREATE TABLE Users(
 	UserName varchar(50) NOT NULL,
 	UserInfo varchar(100),
 	UserRole int FOREIGN KEY REFERENCES Roles(RoleID)
-)
+);
 
 CREATE TABLE Taverns (
 	TavernID int IDENTITY(1, 1) PRIMARY KEY,
