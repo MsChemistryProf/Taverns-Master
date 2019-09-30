@@ -1,0 +1,20 @@
+-- ITEM #1
+-- Note: I am considering the roles of Owner and Proprietor to be Admin roles.
+SELECT u.UserName, u.UserInfo, r.RoleName FROM Roles r LEFT JOIN Users u ON r.RoleID = u.UserRole
+  WHERE r.RoleID = 1 or r.RoleID = 2;
+
+-- ITEM #2
+SELECT u.UserName, u.UserInfo, r.RoleName, t.TavernName FROM Roles r 
+LEFT JOIN Users u ON r.RoleID = u.UserRole  
+RIGHT JOIN Taverns t ON t.TavernOwner = u.userID
+WHERE r.RoleID = 1 or r.RoleID = 2;
+
+-- ITEM #3
+SELECT g.GuestName, l.Level, c.ClassName FROM Guests g 
+LEFT JOIN Levels l ON g.GuestID = l.LevelID
+LEFT JOIN Class c ON l.ClassID = c.ClassID
+ORDER BY g.GuestName ASC;
+
+-- ITEM #4
+SELECT TOP 10 s.TotalPrice, s.DateOfSale, s.AmountPurchased, Service.ServiceName
+FROM Sales s LEFT JOIN Service ON s.ServiceID = Service.ServiceID ORDER BY TotalPrice;
