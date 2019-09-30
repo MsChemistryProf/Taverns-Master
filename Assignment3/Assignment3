@@ -90,4 +90,9 @@ SELECT Guests.GuestName, Levels.Level, Class.ClassName,
  FROM Levels LEFT JOIN Class ON Levels.ClassID = Class.ClassID LEFT JOIN Guests ON Levels.GuestID = Guests.GuestID;
 
  -- ITEM #9
+ SELECT CONCAT('INSERT INTO ',TABLE_NAME, ' VALUES (') as QueryPiece FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'RoomStatus'
+ UNION ALL
+ SELECT CONCAT (Guest_Status.GuestStatusName, ',') as QueryPiece FROM Guest_Status
+ UNION ALL
+ SELECT ')';
 
