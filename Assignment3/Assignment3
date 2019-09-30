@@ -70,3 +70,24 @@ SELECT Guests.GuestName FROM Stays LEFT JOIN Guests ON Stays.GuestID = Guests.Gu
 SELECT TOP 10 TotalPrice, DateOfSale, AmountPurchased, Service.ServiceName FROM Sales LEFT JOIN Service ON Sales.ServiceID = Service.ServiceID ORDER BY TotalPrice;
 
 -- ITEM #7
+SELECT 'Class' as Type, ClassID, ClassName  FROM Class
+UNION
+SELECT 'Guest Status', GuestStatusID, GuestStatusName  FROM Guest_Status
+UNION
+SELECT 'Locations', LocationID, LocationName  FROM Locations
+UNION
+SELECT 'Roles', RoleID, RoleName FROM Roles
+UNION
+SELECT 'Room Status', RoomStatusID, RoomStatusName FROM RoomStatus
+UNION
+SELECT 'Service Status', StatusID, StatusName FROM Status;
+
+-- ITEM #8
+SELECT Guests.GuestName, Levels.Level, Class.ClassName, 
+ (CASE WHEN Level <= 10 THEN '1-10' 
+ WHEN Level BETWEEN 11 AND 20 THEN '11-20'
+ ELSE 'Unknown level' END) as LevelGrouping
+ FROM Levels LEFT JOIN Class ON Levels.ClassID = Class.ClassID LEFT JOIN Guests ON Levels.GuestID = Guests.GuestID;
+
+ -- ITEM #9
+
