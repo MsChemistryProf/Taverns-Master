@@ -3,8 +3,6 @@
 
 -- ITEM #1
 
-
-
 DROP TABLE IF EXISTS Stays;
 DROP TABLE IF EXISTS Rooms;
 DROP TABLE IF EXISTS Roomstatus;
@@ -22,18 +20,19 @@ INSERT INTO RoomStatus VALUES
 CREATE TABLE Rooms (
 	RoomID int IDENTITY(1,1) PRIMARY KEY,
 	RoomName varchar(20),
+	RoomCost smallmoney,
 	RoomStatusID int FOREIGN KEY REFERENCES RoomStatus(RoomStatusID),
 	RoomTavernID int FOREIGN KEY REFERENCES Taverns(TavernID)
 	);
 
 INSERT INTO Rooms VALUES
-	('The Penthouse',1,1),
-	('Pics Pick',1,4),
-	('Room 305',1,2),
-	('Room 202',3,2),
-	('Room 201',2,6),
-	('Room 202',1,6),
-	('Room 142',2,5);
+	('The Penthouse',1000,1,1),
+	('Pics Pick',500,1,4),
+	('Room 305',75,1,2),
+	('Room 202',50,3,2),
+	('Room 201',150,2,6),
+	('Room 202',250,1,6),
+	('Room 142',125,2,5);
 
 INSERT INTO Service VALUES
 	('Room Stay', 3);
@@ -50,4 +49,24 @@ INSERT INTO Stays VALUES
 	(6,2,'09-18-2019',500.00),
 	(1,7,'09-02-2019',200.00),
 	(5,4,'09-22-2019',150.00),
-	(7,7,'08-15-2019',999.00);
+	(7,7,'08-15-2019',999.00),
+	(1,2,'09-20-2019',75.00);
+GO
+
+
+--ITEM #2
+SELECT * FROM Guests WHERE GuestBirthday < '2000-01-01';
+
+--ITEM #3
+SELECT * FROM Rooms WHERE RoomCost > 100;
+
+--ITEM #4
+SELECT DISTINCT Guests.GuestName FROM Stays LEFT JOIN Guests ON Stays.GuestID = Guests.GuestID;
+
+-- ITEM #5
+SELECT Guests.GuestName FROM Stays LEFT JOIN Guests ON Stays.GuestID = Guests.GuestID ORDER BY Guests.GuestName ASC;
+
+-- ITEM #6
+SELECT TOP 10 TotalPrice, DateOfSale, AmountPurchased, Service.ServiceName FROM Sales LEFT JOIN Service ON Sales.ServiceID = Service.ServiceID ORDER BY TotalPrice;
+
+-- ITEM #7
