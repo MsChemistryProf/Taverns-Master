@@ -1,0 +1,60 @@
+-- ITEM #1
+SELECT UserName, UserInfo, RoleName, RoleDescription FROM Users u
+LEFT JOIN Roles r ON u.UserRole = r.RoleID;
+
+-- ITEM #2
+SELECT c.ClassName, COUNT(l.GuestID) as NumGuests FROM Class c
+LEFT JOIN Levels l ON l.ClassID = c.ClassID
+GROUP BY c.ClassName;
+
+-- ITEM #3
+SELECT g.GuestName, c.ClassName, l.Level,
+	CASE
+		WHEN l.level < 6 THEN 'Beginner'
+		WHEN l.level >= 6 AND l.level <= 10 THEN 'Intermediate'
+		WHEN l.level > 10 THEN 'Expert'
+	END LevelType
+FROM Guests g
+LEFT JOIN Levels l ON g.GuestID = l.GuestID
+LEFT JOIN Class c ON l.ClassID = c.ClassID
+ORDER BY g.GuestName ASC;
+
+-- ITEM #4
+IF OBJECT_ID (N'dbo.getLevelType', N'FN') IS NOT NULL
+	DROP FUNCTION getLevelType;
+GO
+
+CREATE FUNCTION dbo.getLevelType(@level tinyint)
+RETURNS varchar(15)
+AS
+BEGIN
+	DECLARE @LevelType varchar(15);
+	SELECT @LevelType = CASE
+		WHEN @level < 6 THEN 'Beginner'
+		WHEN @level >= 6 AND @level <= 10 THEN 'Intermediate'
+		WHEN @level > 10 THEN 'Expert'
+	END
+RETURN @LevelType;
+END;
+
+-- TO RUN FUNCTION:  SELECT dbo.getLevelType(8) LevelType;
+
+
+-- ITEM #5
+IF OBJECT_ID(N'openRooms', N'IF') IS NOT NULL
+	DROP FUNCTION openRooms;
+GO
+
+CREATE FUNCTION openRooms(@date DATE)
+RETURNS TABLE
+AS RETURN
+	(SELECT DISTINCT r.RoomName, t.TavernName
+	FROM Rooms r
+	LEFT JOIN Stays s ON r.RoomID = s.RoomID
+	LEFT JOIN Taverns t ON r.RoomTavernID = t.TavernID
+	WHERE (NOT s.DateOfStay = @date) OR s.DateOfStay IS NULL);
+GO
+
+SELECT * FROM openRooms('2019-09-02')
+
+
