@@ -16,5 +16,48 @@ LEFT JOIN Class c ON l.ClassID = c.ClassID
 ORDER BY g.GuestName ASC;
 
 -- ITEM #4
-SELECT TOP 10 s.TotalPrice, s.DateOfSale, s.AmountPurchased, Service.ServiceName
-FROM Sales s LEFT JOIN Service ON s.ServiceID = Service.ServiceID ORDER BY TotalPrice;
+SELECT TOP 10 s.TotalPrice, s.DateOfSale, s.AmountPurchased, Service.ServiceName FROM Sales s LEFT JOIN Service ON s.ServiceID = Service.ServiceID ORDER BY TotalPrice;
+
+-- ITEM #5
+SELECT l.GuestID, g.GuestName, COUNT(l.ClassID) as NumClasses
+FROM Levels l 
+LEFT JOIN Guests g ON l.GuestID = g.GuestID
+GROUP BY l.GuestID, g.GuestName
+HAVING
+  COUNT(l.ClassID) > 1;
+
+-- ITEM #6
+/** NOTE: INSERTED THE FOLLOWING DATA IN TO MAKE NEXT QUERY HAVE DATA
+	INSERT INTO Levels (GuestID, Level, ClassID, DateAchieved) 
+	VALUES
+	(7, 8, 2, '2019-10-02')
+	(7, 6, 5, '2019-10-02');
+**/
+
+SELECT l.GuestID, g.GuestName, COUNT(l.ClassID) as NumClasses
+FROM Levels l 
+LEFT JOIN Guests g ON l.GuestID = g.GuestID
+WHERE l.level > 5
+GROUP BY l.GuestID, g.GuestName
+HAVING
+  COUNT(l.ClassID) > 1;
+
+-- ITEM #7
+SELECT g.GuestName, MAX(l.Level) as HighLevel
+FROM Levels l 
+LEFT JOIN Guests g ON l.GuestID = g.GuestID
+GROUP BY l.GuestID, g.GuestName 
+ORDER BY g.GuestName ASC;
+
+-- ITEM #8
+-- Note: I hadn't pre-thought of Guests staying more than one night, so
+-- my db really only has DateOfStay as one night. In this case, the users
+-- would need to input each night as a separate stay, and they would surely
+-- be requesting a software upgrade in the near future.
+SELECT g.GuestName, s.DateOfStay
+FROM Stays s
+LEFT JOIN Guests g ON s.GuestID = g.GuestID
+WHERE DateOfStay BETWEEN '2019-08-01' and '2019-09-05';
+
+-- ITEM #9
+-- ?? 
